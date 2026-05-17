@@ -1,5 +1,4 @@
 services:
-  # Apache Kafka (Broker único usando KRaft)
   kafka:
     image: confluentinc/cp-kafka:7.5.3
     container_name: kafka-broker
@@ -18,7 +17,6 @@ services:
       CLUSTER_ID: 'MkU3OEVBNTcwNTJENDM2Qk'
       KAFKA_OFFERS_INTER_BROKER_LISTENER_NAME: 'INTERNAL'
 
-  # Nosso ambiente de execução
   app:
     image: apache/spark:3.5.0
     container_name: fraud-app

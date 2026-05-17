@@ -33,9 +33,9 @@ df_transactions = df_kafka.selectExpr("CAST(value AS STRING) as json_payload") \
     .select("data.*") \
     .withColumn("timestamp", col("timestamp").cast(TimestampType()))
 
-# - withWatermark: Permite que dados atrasem até 5 minutos na rede sem quebrar a lógica
-# - window: Cria fatias de tempo de 2 minutos que se reavaliam a cada 10 segundos
-# - filter: Se o mesmo user_id comprou em mais de 1 país diferente nesses 2 minutos -> Alerta!
+# - withWatermark: It allows data to be delayed for up to 5 minutes on the network without breaking the logic.
+# - window: Creates 2-minute time slices that re-evaluate every 10 seconds.
+# - filter: If the same user_id made purchases in more than one different country within those two minutes -> Alert!
 df_alerts = df_transactions \
     .withWatermark("timestamp", "5 minutes") \
     .groupBy(
